@@ -27,11 +27,13 @@ try:
     from os import path, getcwd
     from os import name as os_name
 except ImportError as err:
-    print(f"VSI:Audio:ImportError: {err}")
-    raise
+    raise SystemExit(f"VSI:Audio:ImportError: {err}") from err
+    #print(f"VSI:Audio:ImportError: {err}")
+    #raise
 except Exception as e:
-    print(f"VSI:Audio:Exception: {type(e).__name__}")
-    raise
+    raise SystemExit(f"VSI:Audio:Exception: {type(e).__name__}: {e}") from e
+    #print(f"VSI:Audio:Exception: {type(e).__name__}")
+    #raise
 
 logger = logging.getLogger(__name__)
 
