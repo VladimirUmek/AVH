@@ -18,6 +18,11 @@
 # This module provides a client interface for communicating with a VSI (Virtual Streaming Interface) audio server.
 # It allows configuration, streaming, and audio data transfer operations, typically used in hardware simulation or testing environments.
 
+import sys
+# Print Python environment information
+print(f"Python version: {sys.version}")
+print(f"Python executable: {sys.executable}")
+
 try:
     import time
     import atexit
