@@ -18,6 +18,11 @@
 # This module provides a client interface for communicating with a VSI (Virtual Streaming Interface) audio server.
 # It allows configuration, streaming, and audio data transfer operations, typically used in hardware simulation or testing environments.
 
+import sys
+# Print Python environment information
+print(f"Python version: {sys.version}")
+print(f"Python executable: {sys.executable}")
+
 try:
     import time
     import atexit
@@ -27,11 +32,13 @@ try:
     from os import path, getcwd
     from os import name as os_name
 except ImportError as err:
-    print(f"VSI:Audio:ImportError: {err}")
-    raise
+    raise SystemExit(f"VSI:Audio:ImportError: {err}") from err
+    #print(f"VSI:Audio:ImportError: {err}")
+    #raise
 except Exception as e:
-    print(f"VSI:Audio:Exception: {type(e).__name__}")
-    raise
+    raise SystemExit(f"VSI:Audio:Exception: {type(e).__name__}: {e}") from e
+    #print(f"VSI:Audio:Exception: {type(e).__name__}")
+    #raise
 
 logger = logging.getLogger(__name__)
 
