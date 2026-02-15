@@ -16,6 +16,11 @@
 
 # Python VSI Audio Server module
 
+import sys
+# Print Python environment information
+print(f"Python version: {sys.version}")
+print(f"Python executable: {sys.executable}")
+
 try:
     import argparse
     import ipaddress
