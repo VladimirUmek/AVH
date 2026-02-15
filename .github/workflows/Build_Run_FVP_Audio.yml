@@ -106,6 +106,8 @@ jobs:
     - name: Execute example
       working-directory: ./example/FVP_Audio
       run: |
+        python -c "import pyaudio, cv2; print('Imports OK')"
+        python3.9 -c "import pyaudio, cv2; print('Imports OK')"
         ${{ matrix.context.model }} \
         -a ./out/${{matrix.context.proj}}/${{matrix.context.target_type}}/${{matrix.context.build_type}}/${{matrix.context.proj}}.${{matrix.toolchain.ext}} \
         -f ./board/${{matrix.context.layer}}/fvp_config.txt \
