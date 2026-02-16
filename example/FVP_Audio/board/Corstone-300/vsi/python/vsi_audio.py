@@ -21,7 +21,7 @@
 import sys
 # Print Python environment information
 print(f"VSI:Audio:Python version: {sys.version}")
-print(f"VSI:Audio:Server:Python executable: {sys.executable}")
+print(f"VSI:Audio:Python executable: {sys.executable}")
 
 try:
     import time
@@ -33,12 +33,8 @@ try:
     from os import name as os_name
 except ImportError as err:
     raise SystemExit(f"VSI:Audio:ImportError: {err}") from err
-    #print(f"VSI:Audio:ImportError: {err}")
-    #raise
 except Exception as e:
     raise SystemExit(f"VSI:Audio:Exception: {type(e).__name__}: {e}") from e
-    #print(f"VSI:Audio:Exception: {type(e).__name__}")
-    #raise
 
 logger = logging.getLogger(__name__)
 
