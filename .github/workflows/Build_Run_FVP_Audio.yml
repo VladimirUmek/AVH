@@ -74,10 +74,10 @@ jobs:
     - name: Install Python packages
       run: |
         sudo apt-get update
-        sudo apt-get install -y portaudio19-dev python3.9-dev python3.9-distutils
+        sudo apt-get install -y portaudio19-dev
         python3 --version
         python3 -m pip install --user opencv-python
-        python3 -m pip install --user --no-binary :all: pyaudio
+        python3 -m pip install --user pyaudio
         python3 -c "import pyaudio, cv2; print('Imports OK')"
 
     - name: Install tools
