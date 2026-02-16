@@ -75,9 +75,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y portaudio19-dev
-        python3.9 --version
-        python3.9 -m pip install pyaudio opencv-python
-        python3.9 -c "import pyaudio, cv2; print('Imports OK')"
+        python3 --version
+        python3 -m pip install pyaudio opencv-python
+        python3 -c "import pyaudio, cv2; print('Imports OK')"
 
     - name: Install tools
       uses: ARM-software/cmsis-actions/vcpkg@v1
@@ -108,7 +108,7 @@ jobs:
       working-directory: ./example/FVP_Audio
       run: |
         python -c "import pyaudio, cv2; print('Imports OK')"
-        python3.9 -c "import pyaudio, cv2; print('Imports OK')"
+        python3 -c "import pyaudio, cv2; print('Imports OK')"
         ${{ matrix.context.model }} \
         -a ./out/${{matrix.context.proj}}/${{matrix.context.target_type}}/${{matrix.context.build_type}}/${{matrix.context.proj}}.${{matrix.toolchain.ext}} \
         -f ./board/${{matrix.context.layer}}/fvp_config.txt \
