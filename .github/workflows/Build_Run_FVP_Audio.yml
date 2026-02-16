@@ -74,9 +74,10 @@ jobs:
     - name: Install Python packages
       run: |
         sudo apt-get update
-        sudo apt-get install -y portaudio19-dev
+        sudo apt-get install -y portaudio19-dev python3.9-dev python3.9-distutils
         python3 --version
-        python3 -m pip install pyaudio opencv-python
+        python3 -m pip install --user opencv-python
+        python3 -m pip install --user --no-binary :all: pyaudio
         python3 -c "import pyaudio, cv2; print('Imports OK')"
 
     - name: Install tools
@@ -86,6 +87,14 @@ jobs:
 
     - name: Activate Arm tool license
       uses: ARM-software/cmsis-actions/armlm@v1
+
+    - name: Fix FVP libstdc++ compatibility
+      run: |
+        FVP_PATH=$(dirname $(which FVP_Corstone_SSE-300))
+        if [ -f "$FVP_PATH/../fmtplib/libstdc++.so.6" ]; then
+          echo "Renaming old libstdc++.so.6 to avoid version conflicts"
+          mv "$FVP_PATH/../fmtplib/libstdc++.so.6" "$FVP_PATH/../fmtplib/libstdc++.so.6.bak"
+        fi
 
     - name: Initialize CMSIS pack root folder
       run: |
@@ -107,8 +116,6 @@ jobs:
     - name: Execute example
       working-directory: ./example/FVP_Audio
       run: |
-        python -c "import pyaudio, cv2; print('Imports OK')"
-        python3 -c "import pyaudio, cv2; print('Imports OK')"
         ${{ matrix.context.model }} \
         -a ./out/${{matrix.context.proj}}/${{matrix.context.target_type}}/${{matrix.context.build_type}}/${{matrix.context.proj}}.${{matrix.toolchain.ext}} \
         -f ./board/${{matrix.context.layer}}/fvp_config.txt \
