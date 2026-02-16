@@ -75,9 +75,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y portaudio19-dev
-        python --version
-        python -m pip install pyaudio opencv-python
-        python -c "import pyaudio, cv2; print('Imports OK')"
+        python3.9 --version
+        python3.9 -m pip install pyaudio opencv-python
+        python3.9 -c "import pyaudio, cv2; print('Imports OK')"
 
     - name: Install tools
       uses: ARM-software/cmsis-actions/vcpkg@v1
