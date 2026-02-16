@@ -20,8 +20,8 @@
 
 import sys
 # Print Python environment information
-print(f"Python version: {sys.version}")
-print(f"Python executable: {sys.executable}")
+print(f"VSI:Audio:Python version: {sys.version}")
+print(f"VSI:Audio:Server:Python executable: {sys.executable}")
 
 try:
     import time
