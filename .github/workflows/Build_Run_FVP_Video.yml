@@ -141,7 +141,7 @@ jobs:
           exit 1
         fi
         echo "Check output file:"
-        if [ -f "./sample/video_out.mp4" ]; then
+        if [ -f "./sample/VideoOut.mp4" ]; then
           echo "Passed"
         else
           echo "Failed"

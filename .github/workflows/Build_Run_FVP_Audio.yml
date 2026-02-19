@@ -141,7 +141,7 @@ jobs:
           exit 1
         fi
         echo "Check output file:"
-        if [ -f "./sample/audio_out.wav" ]; then
+        if [ -f "./sample/AudioOut.wav" ]; then
           echo "Passed"
         else
           echo "Failed"
