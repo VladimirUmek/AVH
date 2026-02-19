@@ -123,13 +123,15 @@ jobs:
         -C ${{matrix.context.mps}}_board.uart0.out_file=${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.log \
         --simlimit 30
 
-    - name: Show example output
+    - name: Show UART output
       working-directory: ./example/FVP_Audio
       run: |
         echo "FVP UART output:"
         cat ${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.log
 
-    - name: Check example output
+    - name: Check UART output
+      # Disable SSE-320 output check due to known issue with FVP UART output
+      if: matrix.context.target_type != 'SSE-320'
       working-directory: ./example/FVP_Audio
       run: |
         echo "Check FVP UART output:"
@@ -140,6 +142,10 @@ jobs:
           echo "Failed"
           exit 1
         fi
+
+    - name: Check audio output
+      working-directory: ./example/FVP_Audio
+      run: |
         echo "Check output file:"
         if [ -f "./sample/AudioOut.wav" ]; then
           echo "Passed"
@@ -153,3 +159,9 @@ jobs:
       with:
         name: ${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.log
         path: ./example/FVP_Audio/${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.log
+
+    - name: Upload Audio file
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.AudioOut.wav
+        path: ./example/FVP_Audio/sample/AudioOut.wav
