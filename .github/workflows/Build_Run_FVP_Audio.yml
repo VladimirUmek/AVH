@@ -128,8 +128,6 @@ jobs:
         cat ${{matrix.context.proj}}_${{matrix.context.build_type}}_${{matrix.context.target_type}}_${{matrix.toolchain.name}}.log
 
     - name: Check UART output
-      # Disable SSE-320 output check due to known issue with FVP UART output
-      if: matrix.context.target_type != 'SSE-320'
       working-directory: ./example/FVP_Audio
       run: |
         echo "Check FVP UART output:"
