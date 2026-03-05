@@ -1,3 +1,3 @@
 function writeFooter()  {
-    document.write('Generated on Wed Mar  4 2026 13:52:16 for PROJECT_NAME           = Examples Version 2.2.0 by Arm Ltd. All rights reserved.');
+    document.write('Generated on Thu Mar  5 2026 08:11:39 for PROJECT_NAME           = Examples Version 2.2.0 by Arm Ltd. All rights reserved.');
 };
